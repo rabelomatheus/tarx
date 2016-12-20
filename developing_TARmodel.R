@@ -6,7 +6,7 @@ rm(list=ls())
 
 # Coeficiente autoregressivo de primeira ordem
 a1 <- 0.7
-# Gerando 200 números aleatórios de uma Normal(0,1)
+# Gerando 200 nÃºmeros aleatÃ³rios de uma Normal(0,1)
 et <- rnorm(200)
 # Gerando o processo AR(1), com primeiro elemento igual ao primeiro choque
 y <- numeric(200)
@@ -49,7 +49,7 @@ plot(y, type="l", main="AR(1)")
 plot(ytar, type="l", main="TAR")
 
 
-# estimando um TAR arbitrário
+# estimando um TAR arbitrÃ¡rio
 z <- ts.intersect(as.ts(y), lag(as.ts(y), -1))
 x1 <- ind1[2:length(ind1)]*z[,2]
 x2 <- ind2[2:length(ind1)]*z[,2]
@@ -80,7 +80,7 @@ for(i in 1:length(t_grid)){
 
 rm(list=ls())
 #########################################################
-# USANDO O PACOTE rbcb p/ download de séries do SGS/BCB #
+# USANDO O PACOTE rbcb p/ download de sÃ©ries do SGS/BCB #
 #########################################################
 
 # Para instalar o package:
@@ -91,7 +91,7 @@ rm(list=ls())
 #     install.packages('xts')
 #     devtools::install_github('wilsonfreitas/rbcb')
 
-# Códigos das séries:
+# CÃ³digos das sÃ©ries:
 #     IPCA (var % mensal): 433
 #     IBC-Br sem ajuste sazonal: 24363
 #     IBC-Br com ajuste sazonal: 24364
@@ -101,4 +101,7 @@ library(rbcb)
 ipca <- rbcb::get_series(433, last=48)
 
 plot(ipca, type="l")
+
+#######################################################
+################ Controle de alteraÃ§Ãµes ###############
 
