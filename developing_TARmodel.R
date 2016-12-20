@@ -1,4 +1,4 @@
-rm(list=ls())
+#rm(list=ls())
 
 ################################################### 
 # Reproduzindo a figura 7.2 do Enders (panel(d)) #
