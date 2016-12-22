@@ -102,3 +102,47 @@ ipca <- rbcb::get_series(433, last=48)
 
 plot(ipca, type="l")
 
+###########################################################################################################
+
+rm(list=ls())
+
+################################################### 
+# Reproduzindo a figura 7.2 do Enders (panel(d)) #
+###################################################
+
+# Coeficiente autoregressivo de primeira ordem
+a1 <- 0.7
+# Gerando 200 números aleatórios de uma Normal(0,1)
+et <- rnorm(200)
+# Gerando o processo AR(1), com primeiro elemento igual ao primeiro choque
+y <- numeric(200)
+y[1] <- et[1]
+  
+    for (i in 1:199){
+      y[i+1] = a1*y[i] + et[i+1]
+    }
+
+#plot(y, type="l")
+
+# Ordenação dos Thresholds
+y <- as.ts(y)
+yd = as.ts(y[2:200])
+
+m <- ts.intersect(y, yd)
+
+tr = sort(m[,2])
+
+# Alternativa ao loop para criar as indicadoras
+
+
+x1 = matrix(NA,199,199)
+x2 = matrix(NA,199,199)
+ind = numeric(199)
+sqr = numeric(199)
+for(i in 1:length(ind)){
+  ind[i] <-ifelse(m[i,2]>tr[i],1,0)
+  x1[,i] = ind[i]*m[,2]
+  x2[,i] = (1-ind[i])*m[,2]
+  sqr[i] = sum((lm(m[,1] ~ x1[,i] + x2[,i] -1)$residuals)^2)
+}
+
