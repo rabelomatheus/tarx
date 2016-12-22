@@ -103,3 +103,5 @@ ipca <- rbcb::get_series(433, last=48)
 plot(ipca, type="l")
 
 qlqr merda
+
+blz garotao
